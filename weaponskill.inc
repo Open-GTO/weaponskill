@@ -85,6 +85,20 @@ stock GetPlayerSkillLevel(playerid, skill)
 }
 
 /*
+	GivePlayerSkillLevel
+*/
+
+stock GivePlayerSkillLevel(playerid, skill, amount)
+{
+	if (skill < 0 || skill > sizeof(gPlayerWeaponSkill[]) - 1) {
+		return 0;
+	}
+
+	gPlayerWeaponSkill[playerid][skill] += amount;
+	return 1;
+}
+
+/*
 	GetWeaponSkillName
 */
 
