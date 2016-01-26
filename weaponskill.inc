@@ -49,6 +49,22 @@ static
 	gPlayerWeaponSkill[MAX_PLAYERS][MAX_WEAPON_SKILLS];
 
 /*
+	GivePlayerSkillLevel
+*/
+
+stock GivePlayerSkillLevel(playerid, skill, amount)
+{
+	if (skill < 0 || skill > sizeof(gPlayerWeaponSkill[]) - 1) {
+		return 0;
+	}
+
+	gPlayerWeaponSkill[playerid][skill] += amount;
+
+	return
+		SetPlayerSkillLevel(playerid, skill, gPlayerWeaponSkill[playerid][skill]);
+}
+
+/*
 	SetPlayerSkillLevel
 */
 
@@ -82,20 +98,6 @@ stock GetPlayerSkillLevel(playerid, skill)
 	}
 
 	return gPlayerWeaponSkill[playerid][skill];
-}
-
-/*
-	GivePlayerSkillLevel
-*/
-
-stock GivePlayerSkillLevel(playerid, skill, amount)
-{
-	if (skill < 0 || skill > sizeof(gPlayerWeaponSkill[]) - 1) {
-		return 0;
-	}
-
-	gPlayerWeaponSkill[playerid][skill] += amount;
-	return 1;
 }
 
 /*
