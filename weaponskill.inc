@@ -133,6 +133,17 @@ stock SetPlayerSkillLevelArray(playerid, array[MAX_WEAPON_SKILLS])
 }
 
 /*
+	ResetPlayerSkillLevel
+*/
+
+stock ResetPlayerSkillLevel(playerid)
+{
+	for (new skill = 0; skill < sizeof(gPlayerWeaponSkill[]); skill++) {
+		SetPlayerSkillLevel(playerid, skill, 0);
+	}
+}
+
+/*
 	GetWeaponSkillName
 */
 
