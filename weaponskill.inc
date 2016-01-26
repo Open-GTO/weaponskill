@@ -24,6 +24,14 @@
 	#define MAX_WEAPON_SKILLS 11
 #endif
 
+#if !defined MAX_WEAPON_SKILL_LEVEL
+	#define MAX_WEAPON_SKILL_LEVEL 999
+#endif
+
+#if !defined MIN_WEAPON_SKILL_LEVEL
+	#define MIN_WEAPON_SKILL_LEVEL 0
+#endif
+
 /*
 	Vars
 */
@@ -49,22 +57,6 @@ static
 	gPlayerWeaponSkill[MAX_PLAYERS][MAX_WEAPON_SKILLS];
 
 /*
-	GivePlayerSkillLevel
-*/
-
-stock GivePlayerSkillLevel(playerid, skill, amount)
-{
-	if (skill < 0 || skill > sizeof(gPlayerWeaponSkill[]) - 1) {
-		return 0;
-	}
-
-	gPlayerWeaponSkill[playerid][skill] += amount;
-
-	return
-		SetPlayerSkillLevel(playerid, skill, gPlayerWeaponSkill[playerid][skill]);
-}
-
-/*
 	SetPlayerSkillLevel
 */
 
@@ -72,6 +64,12 @@ stock WS_SetPlayerSkillLevel(playerid, skill, level)
 {
 	if (skill < 0 || skill > sizeof(gPlayerWeaponSkill[]) - 1) {
 		return 0;
+	}
+
+	if (level > MAX_WEAPON_SKILL_LEVEL) {
+		level = MAX_WEAPON_SKILL_LEVEL;
+	} else if (level < MIN_WEAPON_SKILL_LEVEL) {
+		level = MIN_WEAPON_SKILL_LEVEL;
 	}
 
 	gPlayerWeaponSkill[playerid][skill] = level;
@@ -98,6 +96,18 @@ stock GetPlayerSkillLevel(playerid, skill)
 	}
 
 	return gPlayerWeaponSkill[playerid][skill];
+}
+
+/*
+	GivePlayerSkillLevel
+*/
+
+stock GivePlayerSkillLevel(playerid, skill, amount)
+{
+	amount += GetPlayerSkillLevel(playerid, skill);
+
+	return
+		SetPlayerSkillLevel(playerid, skill, amount);
 }
 
 /*
