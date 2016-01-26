@@ -110,6 +110,19 @@ stock GetPlayerSkillLevelArray(playerid, array[MAX_WEAPON_SKILLS])
 }
 
 /*
+	SetPlayerSkillLevelArray
+*/
+
+stock SetPlayerSkillLevelArray(playerid, array[MAX_WEAPON_SKILLS])
+{
+	gPlayerWeaponSkill[playerid] = array;
+
+	for (new skill = 0; skill < sizeof(gPlayerWeaponSkill[]); skill++) {
+		SetPlayerSkillLevel(playerid, skill, array[skill]);
+	}
+}
+
+/*
 	GetWeaponSkillName
 */
 
