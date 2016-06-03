@@ -14,7 +14,6 @@
 #endif
 
 #define _weaponskill_included
-#pragma library weaponskill
 
 /*
 	Defines
@@ -82,7 +81,7 @@ stock WS_SetPlayerSkillLevel(playerid, skill, level)
 #else
 	#define _ALS_SetPlayerSkillLevel
 #endif
- 
+
 #define SetPlayerSkillLevel WS_SetPlayerSkillLevel
 
 /*
