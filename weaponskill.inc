@@ -19,10 +19,6 @@
 	Defines
 */
 
-#if !defined MAX_WEAPON_SKILLS
-	#define MAX_WEAPON_SKILLS 11
-#endif
-
 #if !defined MAX_WEAPON_SKILL_LEVEL
 	#define MAX_WEAPON_SKILL_LEVEL 999
 #endif
@@ -31,6 +27,7 @@
 	#define MIN_WEAPON_SKILL_LEVEL 0
 #endif
 
+#define MAX_WEAPON_SKILLS 10
 #define INVALID_WEAPON_SKILL_ID -1
 
 /*
@@ -65,8 +62,7 @@ static const
 		!"Micro-UZI", // WEAPONSKILL_MICRO_UZI
 		!"MP5", // WEAPONSKILL_MP5
 		!"AK47", // WEAPONSKILL_AK47
-		!"M4", // WEAPONSKILL_M4
-		!"Sniper Rifle" // WEAPONSKILL_SNIPERRIFLE
+		!"M4" // WEAPONSKILL_M4
 	};
 
 static
