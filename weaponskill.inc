@@ -31,6 +31,8 @@
 	#define MIN_WEAPON_SKILL_LEVEL 0
 #endif
 
+#define INVALID_WEAPON_SKILL_ID -1
+
 /*
 	Vars
 */
@@ -48,8 +50,23 @@ static const
 		WEAPONSKILL_AK47, // 30
 		WEAPONSKILL_M4, // 31
 		WEAPONSKILL_MICRO_UZI, // 32
-		WEAPONSKILL_SNIPERRIFLE, // 33
+		INVALID_WEAPON_SKILL_ID, // 33
 		WEAPONSKILL_SNIPERRIFLE // 34
+	};
+
+static const
+	gSkillNames[MAX_WEAPON_SKILLS][15 char] = {
+		!"Pistol", // WEAPONSKILL_PISTOL
+		!"Pistol Silenced", // WEAPONSKILL_PISTOL_SILENCED
+		!"Desert Eagle", // WEAPONSKILL_DESERT_EAGLE
+		!"Shotgun", // WEAPONSKILL_SHOTGUN
+		!"Sawnoff Shotgun", // WEAPONSKILL_SAWNOFF_SHOTGUN
+		!"SPAS12 Shotgun", // WEAPONSKILL_SPAS12_SHOTGUN
+		!"Micro-UZI", // WEAPONSKILL_MICRO_UZI
+		!"MP5", // WEAPONSKILL_MP5
+		!"AK47", // WEAPONSKILL_AK47
+		!"M4", // WEAPONSKILL_M4
+		!"Sniper Rifle" // WEAPONSKILL_SNIPERRIFLE
 	};
 
 static
@@ -61,7 +78,7 @@ static
 
 stock WS_SetPlayerSkillLevel(playerid, skill, level)
 {
-	if (skill < 0 || skill > sizeof(gPlayerWeaponSkill[]) - 1) {
+	if (!(0 <= skill < MAX_WEAPON_SKILLS)) {
 		return 0;
 	}
 
@@ -90,10 +107,9 @@ stock WS_SetPlayerSkillLevel(playerid, skill, level)
 
 stock GetPlayerSkillLevel(playerid, skill)
 {
-	if (skill < 0 || skill > sizeof(gPlayerWeaponSkill[]) - 1) {
-		return -1;
+	if (!(0 <= skill < MAX_WEAPON_SKILLS)) {
+		return INVALID_WEAPON_SKILL_ID;
 	}
-
 	return gPlayerWeaponSkill[playerid][skill];
 }
 
@@ -103,6 +119,10 @@ stock GetPlayerSkillLevel(playerid, skill)
 
 stock GivePlayerSkillLevel(playerid, skill, amount)
 {
+	if (!(0 <= skill < MAX_WEAPON_SKILLS)) {
+		return 0;
+	}
+
 	amount += GetPlayerSkillLevel(playerid, skill);
 
 	return
@@ -126,7 +146,7 @@ stock SetPlayerSkillLevelArray(playerid, array[MAX_WEAPON_SKILLS])
 {
 	gPlayerWeaponSkill[playerid] = array;
 
-	for (new skill = 0; skill < sizeof(gPlayerWeaponSkill[]); skill++) {
+	for (new skill = 0; skill < MAX_WEAPON_SKILLS; skill++) {
 		SetPlayerSkillLevel(playerid, skill, array[skill]);
 	}
 }
@@ -137,7 +157,7 @@ stock SetPlayerSkillLevelArray(playerid, array[MAX_WEAPON_SKILLS])
 
 stock ResetPlayerSkillLevel(playerid)
 {
-	for (new skill = 0; skill < sizeof(gPlayerWeaponSkill[]); skill++) {
+	for (new skill = 0; skill < MAX_WEAPON_SKILLS; skill++) {
 		SetPlayerSkillLevel(playerid, skill, 0);
 	}
 }
@@ -148,12 +168,10 @@ stock ResetPlayerSkillLevel(playerid)
 
 stock GetWeaponSkillName(skill, name[], const size = sizeof(name))
 {
-	if (skill < 0 || skill > MAX_WEAPON_SKILLS - 1) {
+	if (!(0 <= skill < MAX_WEAPON_SKILLS)) {
 		return 0;
 	}
-
-	return
-		GetWeaponName(skill + 22, name, size);
+	return strunpack(name, gSkillNames[skill], size);
 }
 
 /*
@@ -163,10 +181,8 @@ stock GetWeaponSkillName(skill, name[], const size = sizeof(name))
 stock GetWeaponSkillID(weaponid)
 {
 	new index = weaponid - 22;
-
-	if (index < 0 || index > sizeof(gWeaponSkills) - 1) {
-		return -1;
+	if (!(0 <= index < sizeof(gWeaponSkills))) {
+		return INVALID_WEAPON_SKILL_ID;
 	}
-
 	return gWeaponSkills[index];
 }
