@@ -67,6 +67,33 @@ static
 	gPlayerWeaponSkill[MAX_PLAYERS][MAX_WEAPON_SKILLS];
 
 /*
+	OnPlayerConnect
+*/
+
+public OnPlayerConnect(playerid)
+{
+	for (new skill = 0; skill < sizeof(gPlayerWeaponSkill[]); skill++) {
+		gPlayerWeaponSkill[playerid][skill] = 999;
+	}
+
+	#if defined WS_OnPlayerConnect
+		return WS_OnPlayerConnect(playerid);
+	#else
+		return 1;
+	#endif
+}
+#if defined _ALS_OnPlayerConnect
+	#undef OnPlayerConnect
+#else
+	#define _ALS_OnPlayerConnect
+#endif
+
+#define OnPlayerConnect WS_OnPlayerConnect
+#if defined WS_OnPlayerConnect
+	forward WS_OnPlayerConnect(playerid);
+#endif
+
+/*
 	SetPlayerSkillLevel
 */
 
