@@ -163,7 +163,7 @@ stock GetPlayerSkillLevelArray(playerid, array[MAX_WEAPON_SKILLS])
 	SetPlayerSkillLevelArray
 */
 
-stock SetPlayerSkillLevelArray(playerid, array[MAX_WEAPON_SKILLS])
+stock SetPlayerSkillLevelArray(playerid, const array[MAX_WEAPON_SKILLS])
 {
 	gPlayerWeaponSkill[playerid] = array;
 
