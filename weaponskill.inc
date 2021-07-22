@@ -46,7 +46,7 @@ static const
 		WEAPONSKILL_MP5, // 29
 		WEAPONSKILL_AK47, // 30
 		WEAPONSKILL_M4, // 31
-		WEAPONSKILL_MICRO_UZI // 32
+		WEAPONSKILL_SNIPERRIFLE // 32
 	};
 
 static const
@@ -60,7 +60,8 @@ static const
 		!"Micro-UZI", // WEAPONSKILL_MICRO_UZI
 		!"MP5", // WEAPONSKILL_MP5
 		!"AK47", // WEAPONSKILL_AK47
-		!"M4" // WEAPONSKILL_M4
+		!"M4",
+		!"Sniper RIfle" // WEAPONSKILL_M4
 	};
 
 static
