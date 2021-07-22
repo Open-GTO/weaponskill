@@ -27,7 +27,7 @@
 	#define MIN_WEAPON_SKILL_LEVEL 0
 #endif
 
-#define MAX_WEAPON_SKILLS 10
+#define MAX_WEAPON_SKILLS 11
 #define INVALID_WEAPON_SKILL_ID -1
 
 /*
